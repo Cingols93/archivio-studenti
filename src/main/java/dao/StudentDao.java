@@ -18,8 +18,12 @@ public class StudentDao {
 
 	private static final String INSERT_STUDENT_SQL = "INSERT INTO studente"
 			+ "(nome, cognome, indirizzo,matricola,data_di_nascita,id_dipartimento) VALUES " + "( ?, ?, ?, ?, ?, ?);";
+	
+	private static final String SELECT_ALL_STUDENTS = "SELECT * FROM studente";
 
-	private static final String SELECT_ALL_STUDENTS = "select * from studente";
+//	private static final String SELECT_ALL_STUDENTS = "SELECT studente.id,studente.nome,studente.cognome,studente.indirizzo,studente.matricola,dipartimento.nome as dipartimento "
+//			+ "FROM studente "
+//			+ "INNER JOIN dipartimento on studente.id_dipartimento = dipartimento.id;";
 	private static final String SELECT_STUDENT_BY_ID = "select * from studente where id = ?";
 	private static final String DELETE_STUDENT_SQL = "delete from studente where id = ?;";
 	private static final String UPDATE_STUDENT_SQL = "update studente set nome = ?,cognome = ?,indirizzo = ?,matricola = ?, data_di_nascita = ?, id_dipartimento = ? where id = ?;";
@@ -97,7 +101,7 @@ public class StudentDao {
 				String dataDiNascita = rs.getString("data_di_nascita");
 				String idDipartimento = rs.getString("id_dipartimento");
 
-				studente = new Student(nome, cognome, indirizzo, matricola, dataDiNascita, idDipartimento);
+				studente = new Student(id, nome, cognome, indirizzo, matricola, dataDiNascita, idDipartimento);
 			}
 		}
 		return studente;
@@ -112,7 +116,7 @@ public class StudentDao {
 
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STUDENTS)) {
 			ResultSet rs = preparedStatement.executeQuery();
-			
+
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String nome = rs.getString("nome");
@@ -122,7 +126,7 @@ public class StudentDao {
 				String dataDiNascita = rs.getString("data_di_nascita");
 				String idDipartimento = rs.getString("id_dipartimento");
 
-				students.add(new Student(id,nome, cognome, indirizzo, matricola, dataDiNascita, idDipartimento));
+				students.add(new Student(id, nome, cognome, indirizzo, matricola, dataDiNascita, idDipartimento));
 			}
 		}
 		return students;

@@ -99,7 +99,7 @@ public class StudentServlet extends HttpServlet {
 		String indirizzo = request.getParameter("indirizzo");
 		String matricola = request.getParameter("matricola");
 		String dataDiNascita = request.getParameter("dataDiNascita");
-		String dipartimento = request.getParameter("dipartimento");
+		String dipartimento = request.getParameter("idDipartimento");
 		
 		Student student = new Student(nome, cognome, indirizzo, matricola, dataDiNascita, dipartimento);
 		studentDao.createStudent(student);
@@ -114,7 +114,7 @@ public class StudentServlet extends HttpServlet {
 		String indirizzo = request.getParameter("indirizzo");
 		String matricola = request.getParameter("matricola");
 		String dataDiNascita = request.getParameter("dataDiNascita");
-		String dipartimento = request.getParameter("dipartimento");		
+		String dipartimento = request.getParameter("idDipartimento");		
 		
 		Student student = new Student(id, nome, cognome, indirizzo, matricola, dataDiNascita, dipartimento);
 		studentDao.updateStudent(student);

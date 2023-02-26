@@ -12,20 +12,7 @@
 </head>
 <body>
 
-	<header>
-		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color: tomato">
-			<div>
-				<a href="http://google.com" class="navbar-brand">Student
-					Management App</a>
-			</div>
-
-			<ul class="navbar-nav">
-				<li><a href="<%=request.getContextPath()%>/list"
-					class="nav-list">Students</a></li>
-			</ul>
-		</nav>
-	</header>
+	<%@ include file="parts/header.jsp" %>  
 	<br>
 	<div class="container col-md-5">
 		<div class="card">
@@ -52,6 +39,7 @@
 					<input type="hidden" name="id"
 						value="<c:out value='${student.id}' />" />
 				</c:if>
+				
 
 				<fieldset class="form-group">
 					<label>Nome</label><input type="text"
