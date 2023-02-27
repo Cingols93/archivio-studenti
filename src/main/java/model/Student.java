@@ -2,34 +2,60 @@ package model;
 
 public class Student {
 	private int id;
-	private String nome;
-	private String cognome;
-	private String indirizzo;
-	private String matricola;
-	private String dataDiNascita;
-	private String idDipartimento;
+	private String name;
+	private String surname;
+	private String address;
+	private String studentId;
+	private String dateOfBirth;
+	private String idDepartment;
+	private String departmentName;
 
-	public Student(int id, String nome, String cognome, String indirizzo, String matricola, String dataDiNascita,
-			String idDipartimento) {
+	public Student() {
 		super();
-		this.id = id;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.indirizzo = indirizzo;
-		this.matricola = matricola;
-		this.dataDiNascita = dataDiNascita;
-		this.idDipartimento = idDipartimento;
 	}
 
-	public Student(String nome, String cognome, String indirizzo, String matricola, String dataDiNascita,
-			String idDipartimento) {
+	public Student(String name, String surname, String address, String studentId, String dateOfBirth,
+			String idDepartment) {
 		super();
-		this.nome = nome;
-		this.cognome = cognome;
-		this.indirizzo = indirizzo;
-		this.matricola = matricola;
-		this.dataDiNascita = dataDiNascita;
-		this.idDipartimento = idDipartimento;
+		this.name = name;
+		this.surname = surname;
+		this.address = address;
+		this.studentId = studentId;
+		this.dateOfBirth = dateOfBirth;
+		this.idDepartment = idDepartment;
+	}
+
+	public Student(int id, String name, String surname, String address, String studentId, String dateOfBirth,
+			String idDepartment) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.address = address;
+		this.studentId = studentId;
+		this.dateOfBirth = dateOfBirth;
+		this.idDepartment = idDepartment;
+	}
+
+	public Student(int id, String name, String surname, String address, String studentId, String dateOfBirth,
+			String idDepartment, String departmentName) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.address = address;
+		this.studentId = studentId;
+		this.dateOfBirth = dateOfBirth;
+		this.idDepartment = idDepartment;
+		this.departmentName = departmentName;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 	public int getId() {
@@ -40,52 +66,52 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCognome() {
-		return cognome;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
-	public String getIndirizzo() {
-		return indirizzo;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setIndirizzo(String indirizzo) {
-		this.indirizzo = indirizzo;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getMatricola() {
-		return matricola;
+	public String getStudentId() {
+		return studentId;
 	}
 
-	public void setMatricola(String matricola) {
-		this.matricola = matricola;
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
 
-	public String getDataDiNascita() {
-		return dataDiNascita;
+	public String getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDataDiNascita(String dataDiNascita) {
-		this.dataDiNascita = dataDiNascita;
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getIdDipartimento() {
-		return idDipartimento;
+	public String getIdDepartment() {
+		return idDepartment;
 	}
 
-	public void setIdDipartimento(String idDipartimento) {
-		this.idDipartimento = idDipartimento;
+	public void setIdDepartment(String idDepartment) {
+		this.idDepartment = idDepartment;
 	}
 
 }

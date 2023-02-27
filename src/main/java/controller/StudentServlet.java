@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DepartmentDao;
 import dao.StudentDao;
+import model.Department;
 import model.Student;
 
 /**
@@ -23,7 +24,9 @@ public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private StudentDao studentDao = new StudentDao();
-
+	
+	private DepartmentDao departmentDao = new DepartmentDao();
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -72,14 +75,18 @@ public class StudentServlet extends HttpServlet {
 	private void listStudent(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 		List<Student> listStudent = studentDao.selectAllStudents();
+		
+		
 		request.setAttribute("listStudent", listStudent);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("studentList.jsp");
 		dispatcher.forward(request, response);
 	}
-
+	
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException, SQLException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("studentForm.jsp");
+		List<Department> listOfDepartment = departmentDao.selectAllDepartments();
+		request.setAttribute("listOfDepartment", listOfDepartment);
 		dispatcher.forward(request, response);
 	}
 
@@ -87,21 +94,23 @@ public class StudentServlet extends HttpServlet {
 			throws ServletException, IOException, SQLException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Student existingStudent = studentDao.getStudentById(id);
+		List<Department> listOfDepartment = departmentDao.selectAllDepartments();
 		RequestDispatcher dispatcher = request.getRequestDispatcher("studentForm.jsp");
 		request.setAttribute("student", existingStudent);
+		request.setAttribute("listOfDepartment", listOfDepartment);
 		dispatcher.forward(request, response);
 	}
 
 	private void insertStudent(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		String nome = request.getParameter("nome");
-		String cognome = request.getParameter("cognome");
-		String indirizzo = request.getParameter("indirizzo");
-		String matricola = request.getParameter("matricola");
-		String dataDiNascita = request.getParameter("dataDiNascita");
-		String dipartimento = request.getParameter("idDipartimento");
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
+		String address = request.getParameter("address");
+		String studentId = request.getParameter("studentId");
+		String dateOfBirth = request.getParameter("dateOfBirth");
+		String idDepartment = request.getParameter("idDepartment");
 		
-		Student student = new Student(nome, cognome, indirizzo, matricola, dataDiNascita, dipartimento);
+		Student student = new Student(name, surname, address, studentId, dateOfBirth, idDepartment);
 		studentDao.createStudent(student);
 		response.sendRedirect("list");
 	}
@@ -109,14 +118,14 @@ public class StudentServlet extends HttpServlet {
 	private void updateStudent(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String nome = request.getParameter("nome");
-		String cognome = request.getParameter("cognome");
-		String indirizzo = request.getParameter("indirizzo");
-		String matricola = request.getParameter("matricola");
-		String dataDiNascita = request.getParameter("dataDiNascita");
-		String dipartimento = request.getParameter("idDipartimento");		
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
+		String address = request.getParameter("address");
+		String studentId = request.getParameter("studentId");
+		String dateOfBirth = request.getParameter("dateOfBirth");
+		String idDepartment = request.getParameter("idDepartment");
 		
-		Student student = new Student(id, nome, cognome, indirizzo, matricola, dataDiNascita, dipartimento);
+		Student student = new Student(id,name, surname, address, studentId, dateOfBirth, idDepartment);
 		studentDao.updateStudent(student);
 		response.sendRedirect("list");
 	}

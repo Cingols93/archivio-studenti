@@ -4,15 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Student Management Application</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	<%@ include file="parts/head.jsp"%>
 </head>
 <body>
 
-	<%@ include file="parts/header.jsp" %>  
+	<%@ include file="parts/header.jsp"%>
 	<br>
 	<div class="container col-md-5">
 		<div class="card">
@@ -27,10 +23,10 @@
 				<caption>
 					<h2>
 						<c:if test="${student != null}">
-            			Edit Student
+            			Modifica Studente
             		</c:if>
 						<c:if test="${student == null}">
-            			Add New Student
+            			Aggiungi nuovo Studente
             		</c:if>
 					</h2>
 				</caption>
@@ -39,45 +35,49 @@
 					<input type="hidden" name="id"
 						value="<c:out value='${student.id}' />" />
 				</c:if>
-				
+
 
 				<fieldset class="form-group">
 					<label>Nome</label><input type="text"
-						value="<c:out value='${student.nome}' />" class="form-control"
-						name="nome" required="required">
+						value="<c:out value='${student.name}' />" class="form-control"
+						name="name" required="required">
 				</fieldset>
 
 				<fieldset class="form-group">
 					<label>Cognome</label><input type="text"
-						value="<c:out value='${student.cognome}' />" class="form-control"
-						name="cognome" required="required">
+						value="<c:out value='${student.surname}' />" class="form-control"
+						name="surname" required="required">
 				</fieldset>
 
 				<fieldset class="form-group">
 					<label>Indirizzo</label><input type="text"
-						value="<c:out value='${student.indirizzo}' />"
-						class="form-control" name="indirizzo" required="required">
+						value="<c:out value='${student.address}' />" class="form-control"
+						name="address" required="required">
 				</fieldset>
 
 				<fieldset class="form-group">
 					<label>Matricola</label><input type="text"
-						value="<c:out value='${student.matricola}' />"
-						class="form-control" name="matricola" required="required">
+						value="<c:out value='${student.studentId}' />"
+						class="form-control" maxlength="5" name="studentId" required="required">
 				</fieldset>
 
 				<fieldset class="form-group">
-					<label>Data di nascita</label><input type="text"
-						value="<c:out value='${student.dataDiNascita}' />"
-						class="form-control" name="dataDiNascita" required="required">
+					<label>Data di nascita</label><input type="date"
+						value="<c:out value='${student.dateOfBirth}' />"
+						class="form-control" name="dateOfBirth" required="required">
 				</fieldset>
-
 				<fieldset class="form-group">
-					<label>Dipartimento</label><input type="text"
-						value="<c:out value='${student.idDipartimento}' />"
-						class="form-control" name="idDipartimento" required="required">
+					<label>Dipartimento</label> 
+					<select class="form-select"
+						aria-label="seleziona un dipartimento" name="idDepartment" required="required">
+						<c:forEach items="${listOfDepartment}" var="department">
+							<option value="${department.id}">${department.name}</option>
+							<br>
+						</c:forEach>
+					</select> 
 				</fieldset>
 
-				<button type="submit" class="btn btn-success">Save</button>
+				<button type="submit" class="btn btn-success mt-2">Save</button>
 				</form>
 			</div>
 		</div>

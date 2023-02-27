@@ -1,27 +1,24 @@
+<%@ page import = "java.io.*,java.util.*" %>
+<%@ page import = "javax.servlet.*,java.text.*" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Student Management Application</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-
-</head>
+<%@ include file="parts/head.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <body>
 
 	<%@ include file="parts/header.jsp"%>
 	<br>
-	
+
 	<div class="container">
-		<h3 class="text-center">List of Students</h3>
+		<h3 class="text-center">Lista degli Studenti</h3>
 		<hr>
 		<div class="container text-left">
-			<a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add
-				new student</a>
+			<a href="<%=request.getContextPath()%>/new" class="btn btn-success">Aggiungi
+				nuovo studente</a>
 		</div>
 		<br>
 		<table class="table table-bordered">
@@ -40,15 +37,21 @@
 				<c:forEach var="student" items="${listStudent}">
 					<tr>
 						<td><c:out value="${student.id}" /></td>
-						<td><c:out value="${student.nome}" /></td>
-						<td><c:out value="${student.cognome}" /></td>
-						<td><c:out value="${student.indirizzo}" /></td>
-						<td><c:out value="${student.matricola}" /></td>
-						<td><c:out value="${student.dataDiNascita}" /></td>
-						<td><c:out value="${student.idDipartimento}" /></td>
-						<td><a href="edit?id=<c:out value='${student.id}' />">Edit</a>
+						<td><c:out value="${student.name}" /></td>
+						<td><c:out value="${student.surname}" /></td>
+						<td><c:out value="${student.address}" /></td>
+						<td><c:out value="${student.studentId}" /></td>
+						<td>
+							<%
+							Date dNow = new Date();
+							SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
+							out.print(ft.format(dNow));
+							%>
+						</td>
+						<td><c:out value="${student.departmentName}" /></td>
+						<td><a href="edit?id=<c:out value='${student.id}' />">Modifica</a>
 							&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="delete?id=<c:out value='${student.id}' />">Delete</a></td>
+							href="delete?id=<c:out value='${student.id}' />">Cancella</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
