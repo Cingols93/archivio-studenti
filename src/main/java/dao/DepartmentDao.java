@@ -41,7 +41,7 @@ public class DepartmentDao extends ConnectionUtil {
 
 	}
 
-	// Get students
+	// Get department
 	public List<Department> selectAllDepartments() throws SQLException {
 		List<Department> departments = new ArrayList<Department>();
 

@@ -22,9 +22,6 @@ public class StudentDao {
 	private static final String SELECT_ALL_STUDENTS = "SELECT student.id,student.name,student.surname,student.address,student.date_of_birth,student.student_id,student.id_department, department.name as department_name "
 			+ "FROM student " + "INNER JOIN department on student.id_department = department.id;";
 	private static final String SELECT_STUDENT_BY_ID = "select * from student where id = ?";
-	private static final String SELECT_STUDENT_BY_NAME = "select * from student where name = ?";
-	private static final String SELECT_STUDENT_BY_SURNAME = "select * from student where surname = ?";
-	private static final String SELECT_STUDENT_BY_DEPARTMENT = "select * from student INNER JOIN department on student.id_department = department.id where id_department = ? ";
 	private static final String DELETE_STUDENT_SQL = "delete from student where id = ?;";
 	private static final String UPDATE_STUDENT_SQL = "update student set name = ?,surname = ?,address = ?,student_id = ?, date_of_birth = ?, id_department = ? where id = ?;";
 
@@ -108,55 +105,6 @@ public class StudentDao {
 
 	}
 
-	// Get studente by Name
-	public Student getStudentByField(String field, String filter) throws SQLException {
-		String query = null;
-		Student studente = null;
-		
-		switch (field) {
-		case "id":{
-			query = SELECT_STUDENT_BY_ID;
-			break;
-		}
-		case "name": {
-			query = SELECT_STUDENT_BY_NAME;
-			break;
-		}
-		case "surname": {
-			query = SELECT_STUDENT_BY_SURNAME;
-			break;
-		}
-		case "department": {
-			query = SELECT_STUDENT_BY_DEPARTMENT;
-			break;
-		}
-		default:
-			query = SELECT_STUDENT_BY_ID;
-			break;
-		}
-
-		try (Connection connection = getConnection();
-
-				PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-			preparedStatement.setString(1, filter);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String surname = rs.getString("surname");
-				String address = rs.getString("address");
-				String studentId = rs.getString("student_id");
-				String dateOfBirth = rs.getString("date_of_birth");
-				String idDepartment = rs.getString("id_department");
-
-				studente = new Student(id, name, surname, address, studentId, dateOfBirth, idDepartment);
-			}
-		}
-		return studente;
-
-	}
 
 	// Get students
 	public List<Student> selectAllStudents() throws SQLException {
